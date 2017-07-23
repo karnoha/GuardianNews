@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()){
+        if (networkInfo != null && networkInfo.isConnected()) {
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(NEWS_LOADER, null, this);
         } else {
@@ -63,24 +63,24 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public Loader<List<News>> onCreateLoader(int id, Bundle args) {
+    public android.content.Loader<List<News>> onCreateLoader(int id, Bundle args) {
         return new NewsLoader(this, API_URL);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<News>> loader, List<News> newsList) {
+    public void onLoadFinished(android.content.Loader<List<News>> loader, List<News> newsList) {
         View progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.GONE);
         mEmptyStateTextView.setText("No news found");
 
         mAdapter.clear();
-        if (newsList != null && !newsList.isEmpty()){
+        if (newsList != null && !newsList.isEmpty()) {
             mAdapter.addAll(newsList);
         }
     }
 
     @Override
-    public void onLoaderReset(Loader<List<News>> loader) {
+    public void onLoaderReset(android.content.Loader<List<News>> loader) {
         mAdapter.clear();
     }
 }

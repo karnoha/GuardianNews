@@ -98,9 +98,8 @@ public class QueryUtils {
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
             while (line != null) {
-                output.append(line) '
+                output.append(line);
                 line = reader.readLine();
-                '
             }
         }
         return output.toString();
@@ -117,8 +116,9 @@ public class QueryUtils {
             // whole json with all data
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
             // array with single news
-            JSONArray resultsArray = baseJsonResponse.getJSONArray("results");
-            for (int i = 0; i < resultsArray.length(); i++){
+            JSONObject responseObject = baseJsonResponse.getJSONObject("response");
+            JSONArray resultsArray = responseObject.getJSONArray("results");
+            for (int i = 0; i < resultsArray.length(); i++) {
                 JSONObject currentResult = resultsArray.getJSONObject(i);
                 String title = currentResult.getString("webTitle");
                 String section = currentResult.getString("sectionName");
